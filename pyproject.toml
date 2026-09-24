@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "doushi-battle"
+version = "1.0.0"
+description = "Retro Terminal Pokémon Battle Simulator with 151 ANSI Color Sprites, 8-Bit Audio & Combat Analytics"
+readme = "README.md"
+authors = [{ name = "Niklas Rotter" }]
+license = { text = "MIT" }
+requires-python = ">=3.8"
+dependencies = [
+    "rich>=13.0.0",
+    "Pillow>=9.0.0",
+]
+
+[project.scripts]
+doushi-battle = "main:main"
+pokemon-battle = "main:main"
+
+[tool.setuptools.package-data]
+"*" = ["*.json", "assets/*"]
