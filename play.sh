@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==============================================================================
 #  ⚡ Retro Terminal Pokémon Battle Simulator — Quick Launcher ⚡
-#  Play instantly: curl -sSL https://raw.githubusercontent.com/niklascodes/doushi-battle/main/play.sh | bash
+#  Play instantly: curl -sSL https://doushi.ai/battle | bash
 # ==============================================================================
 
 set -e
@@ -32,6 +32,11 @@ python3 -c "import rich, PIL" 2>/dev/null || {
     echo "📦 Installing minimal dependencies (rich, pillow)..."
     pip3 install -q rich Pillow 2>/dev/null || pip install -q rich Pillow
 }
+
+# Reconnect stdin to the interactive terminal (fixes EOFError when piped via curl | bash)
+if [ ! -t 0 ] && [ -e /dev/tty ]; then
+    exec < /dev/tty
+fi
 
 # Run the game
 python3 main.py
